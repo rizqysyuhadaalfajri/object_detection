@@ -29,8 +29,8 @@ This model has been trained using the COCO dataset (Common Objects in Context), 
 4. The project is focused on technical demos or prototypes, not for direct industrial production or deployment.
   
 # Source
-Model   : Yolo V8 (You Only Look Once)
-Dataset : COCO
+1. Model   : Yolo V8 (You Only Look Once)
+2. Dataset : COCO
 
 # Dokumentation 
 ![image](https://github.com/user-attachments/assets/88efaa24-1a1b-4110-8247-292082178cd1)
