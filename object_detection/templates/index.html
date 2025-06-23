@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4 text-primary">📸 Galeri Screenshot</h2>
+
+<form method="get" class="mb-4">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+            <label class="form-label">Filter Tanggal:</label>
+            <input type="date" name="date" class="form-control" value="{{ date_filter or '' }}">
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Filter Bulan:</label>
+            <input type="month" name="month" class="form-control" value="{{ month_filter or '' }}">
+        </div>
+        <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary">Tampilkan</button>
+            <a href="/" class="btn btn-outline-secondary">Reset</a>
+        </div>
+    </div>
+</form>
+
+{% if grouped %}
+{% for month, days in grouped.items() %}
+<h3 class="gallery-title">{{ month }}</h3>
+{% for day, images in days.items() %}
+<h5 class="gallery-subtitle">{{ day }}</h5>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-4">
+    {% for img in images %}
+    <div class="col">
+        <div class="card shadow-sm border-0">
+            <img src="/screenshot/{{ img }}" class="card-img-top" data-bs-toggle="modal"
+                data-bs-target="#imgModal{{ loop.index }}">
+            <div class="card-body p-2">
+                <small class="text-muted">{{ img }}</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imgModal{{ loop.index }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
+                <img src="/screenshot/{{ img }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+{% endfor %}
+{% else %}
+<div class="alert alert-warning mt-4">Tidak ada gambar untuk filter ini.</div>
+{% endif %}
+
+{% endblock %}
